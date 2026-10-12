@@ -31,6 +31,7 @@ In the Supabase Dashboard, open **SQL Editor** and run these files in filename o
 3. [`supabase/migrations/20261012020000_business_auth.sql`](./supabase/migrations/20261012020000_business_auth.sql)
 4. [`supabase/migrations/20261012030000_public_product_finder.sql`](./supabase/migrations/20261012030000_public_product_finder.sql)
 5. [`supabase/migrations/20261012040000_product_photos.sql`](./supabase/migrations/20261012040000_product_photos.sql)
+6. [`supabase/migrations/20261012050000_rent_reminders.sql`](./supabase/migrations/20261012050000_rent_reminders.sql)
 
 The migrations assume the existing `products` table has UUID `id`, `name`, `qty`, `cost_price`, and `sell_price` columns; `sales` has `id`, `product_id`, `qty`, `total`, and `created_at`; and `invoices` has `id`, `invoice_no`, `customer_name`, `total`, `status`, and `created_at`.
 
@@ -42,7 +43,7 @@ Business owners can upload optional product photos (JPG, PNG, or WebP, up to 5 M
 
 ### Judge demo setup
 
-1. Apply all five migrations to the Supabase project used by the deployment.
+1. Apply all six migrations to the Supabase project used by the deployment.
 2. In **Authentication → URL Configuration**, set the deployed app URL and add it to the allowed redirect URLs. For a frictionless judging demo, disable email confirmation only if appropriate for your Supabase project; otherwise confirm the account from the signup email.
 3. Deploy the app (for example, by importing the repository into Vercel) and configure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` as deployment environment variables. Redeploy after setting them. Never use a service-role key in the browser.
 4. Open the public URL in a private/incognito window, create a dedicated judge account and business, then add sample products, receive a supplier invoice, record a sale, and create an invoice. Use fictional data only.
@@ -53,6 +54,7 @@ The app repository does not contain deployment credentials and does not create o
 ## Challenge-related features
 
 - **Bookkeeping and cash flow:** Dashboard totals and pages for sales, expenses, budgets, and customer invoices.
+- **Rent reminders:** Business owners can record premises rent due dates and amounts, see upcoming or overdue reminders on the dashboard, and mark payments as paid. These are in-app reminders, not automatic email, SMS, or push notifications; they do not automatically create expense records.
 - **Procurement and stock control:** Record supplier invoices and item lines; received quantities are added to stock. A sale and its stock deduction are recorded in one database transaction.
 - **Customer product discovery:** Customers can search public, in-stock products by name and area on `/discover`, a separate customer-facing directory. Business owners only see controls in Inventory to manage which items are shared; private bookkeeping and inventory management remain the core signed-in experience.
 - **Digital-payment readiness:** Record invoice payment status and method (cash, EFT, mobile money, or other). RandWise does not connect to a payment gateway or verify that funds arrived.

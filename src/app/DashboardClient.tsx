@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import Link from "next/link"
-import { ArrowDownLeft, ArrowUpRight, Boxes, ClipboardList, FileText, HandCoins, ReceiptText, Search, WalletCards } from "lucide-react"
+import { ArrowDownLeft, ArrowUpRight, BellRing, Boxes, CalendarClock, ClipboardList, FileText, HandCoins, ReceiptText, Search, WalletCards } from "lucide-react"
 
 type DailyTotals = {
   key: string
@@ -18,11 +18,30 @@ type RecordedAmount = {
   date?: string
 }
 
+type RentReminder = {
+  id: string
+  title: string
+  amount: number | string
+  due_date: string
+}
+
 function localDateKey(date: Date) {
   const year = date.getFullYear()
   const month = String(date.getMonth() + 1).padStart(2, "0")
   const day = String(date.getDate()).padStart(2, "0")
   return `${year}-${month}-${day}`
+}
+
+function rentReminderLabel(dueDate: string) {
+  const [year, month, day] = dueDate.split("-").map(Number)
+  const [todayYear, todayMonth, todayDay] = localDateKey(new Date()).split("-").map(Number)
+  const days = Math.round(
+    (Date.UTC(year, month - 1, day) - Date.UTC(todayYear, todayMonth - 1, todayDay)) / 86_400_000,
+  )
+  if (days < 0) return `Overdue by ${Math.abs(days)} day${days === -1 ? "" : "s"}`
+  if (days === 0) return "Due today"
+  if (days <= 7) return `Due in ${days} day${days === 1 ? "" : "s"}`
+  return "Upcoming"
 }
 
 function createLastSevenDays(): DailyTotals[] {
@@ -43,6 +62,8 @@ export default function Dashboard() {
   const [stats, setStats] = useState({ sales: 0, expenses: 0, outstanding: 0, lowStock: 0 })
   const [dailyTotals, setDailyTotals] = useState<DailyTotals[]>([])
   const [dashboardError, setDashboardError] = useState("")
+  const [rentReminders, setRentReminders] = useState<RentReminder[]>([])
+  const [rentReminderError, setRentReminderError] = useState("")
 
   useEffect(() => {
     let active = true
@@ -87,6 +108,29 @@ export default function Dashboard() {
       setDailyTotals(lastSevenDays)
     }
     void load()
+    return () => { active = false }
+  }, [])
+
+  useEffect(() => {
+    let active = true
+
+    async function loadRentReminders() {
+      const { data, error } = await supabase
+        .from("rent_reminders")
+        .select("id,title,amount,due_date")
+        .is("paid_at", null)
+        .order("due_date", { ascending: true })
+        .limit(3)
+
+      if (!active) return
+      if (error) {
+        setRentReminderError(`Could not load rent reminders: ${error.message}`)
+        return
+      }
+      setRentReminders(data ?? [])
+    }
+
+    void loadRentReminders()
     return () => { active = false }
   }, [])
 
@@ -227,6 +271,47 @@ export default function Dashboard() {
         )}
       </section>
 
+      <section className="panel mb-8 p-5 sm:p-6">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f79193]/25 text-[#a8434a]">
+              <BellRing size={20} />
+            </span>
+            <div>
+              <p className="eyebrow">Stay ahead</p>
+              <h2 className="font-bold">Rent reminders</h2>
+            </div>
+          </div>
+          <Link href="/rent-reminders" className="text-sm font-bold text-[#246bfd] hover:underline">
+            Manage reminders →
+          </Link>
+        </div>
+        {rentReminderError ? (
+          <p role="alert" className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+            Rent reminders are not available yet. Apply the `20261012050000_rent_reminders.sql` Supabase migration. {rentReminderError}
+          </p>
+        ) : rentReminders.length === 0 ? (
+          <p className="text-sm text-gray-500">No unpaid rent reminders. Add one to see upcoming and overdue rent here.</p>
+        ) : (
+          <div className="space-y-2">
+            {rentReminders.map((reminder) => {
+              const overdue = rentReminderLabel(reminder.due_date).startsWith("Overdue")
+              return (
+                <Link key={reminder.id} href="/rent-reminders" className="flex flex-col gap-2 rounded-xl border border-gray-100 p-3 transition hover:border-[#246bfd]/40 sm:flex-row sm:items-center sm:justify-between">
+                  <span className="flex items-center gap-2 font-semibold text-gray-800">
+                    <CalendarClock size={17} className={overdue ? "text-red-600" : "text-[#246bfd]"} />
+                    {reminder.title} · R{Number(reminder.amount).toFixed(2)}
+                  </span>
+                  <span className={`text-sm font-semibold ${overdue ? "text-red-700" : "text-[#1552d8]"}`}>
+                    {rentReminderLabel(reminder.due_date)} · {new Date(`${reminder.due_date}T00:00:00`).toLocaleDateString("en-ZA")}
+                  </span>
+                </Link>
+              )
+            })}
+          </div>
+        )}
+      </section>
+
       {stats.lowStock > 0 && (
         <div role="status" className="mb-8 flex items-center gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100"><Boxes size={20} /></span>
@@ -244,6 +329,7 @@ export default function Dashboard() {
           { href: "/inventory", title: "Manage inventory", description: "Update products and stock levels", icon: Boxes, tone: "bg-blue-50 text-blue-700" },
           { href: "/sales", title: "Record a sale", description: "Log a sale and update stock", icon: ArrowUpRight, tone: "bg-sky-50 text-sky-700" },
           { href: "/expenses", title: "Track expenses", description: "Keep business spending in check", icon: ReceiptText, tone: "bg-rose-50 text-rose-700" },
+          { href: "/rent-reminders", title: "Set a rent reminder", description: "See upcoming and overdue premises rent", icon: CalendarClock, tone: "bg-[#f79193]/25 text-[#a8434a]" },
           { href: "/budgets", title: "Plan a budget", description: "Set limits and watch progress", icon: WalletCards, tone: "bg-violet-50 text-violet-700" },
           { href: "/invoices", title: "Create an invoice", description: "Bill customers and save a PDF", icon: FileText, tone: "bg-amber-50 text-amber-700" },
           { href: "/payments", title: "Track a payment", description: "Record paid invoices and payment methods", icon: HandCoins, tone: "bg-indigo-50 text-indigo-700" },

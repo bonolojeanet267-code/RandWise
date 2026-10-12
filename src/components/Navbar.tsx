@@ -18,6 +18,7 @@ const focusLinks = [
 const moreLinks = [
   { href: "/sales", label: "Sales" },
   { href: "/expenses", label: "Expenses" },
+  { href: "/rent-reminders", label: "Rent & bills" },
   { href: "/budgets", label: "Budgets" },
   { href: "/invoices", label: "Invoices" },
 ]
