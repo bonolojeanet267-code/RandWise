@@ -17,9 +17,9 @@ type ProductListing = {
 
 function ProductArtwork({ name, imageUrl, index }: { name: string; imageUrl: string | null; index: number }) {
   const palettes = [
-    { from: "#dce7ff", to: "#f3e8ff", shape: "#3159c9", detail: "#ff8b61" },
-    { from: "#ffeadf", to: "#fff3ce", shape: "#d65b42", detail: "#f8a24b" },
-    { from: "#e2e8ff", to: "#dff6f4", shape: "#6558c7", detail: "#3159c9" },
+    { from: "#e8e1f0", to: "#f3e8ff", shape: "#246bfd", detail: "#f79193" },
+    { from: "#ffeaed", to: "#fff3ce", shape: "#f79193", detail: "#8ec97b" },
+    { from: "#e2e8ff", to: "#e7f2ff", shape: "#231934", detail: "#246bfd" },
   ]
   const palette = palettes[index % palettes.length]
   const isBottle = /oil|juice|milk|water|drink|bottle|sauce/i.test(name)
@@ -43,11 +43,11 @@ function ProductArtwork({ name, imageUrl, index }: { name: string; imageUrl: str
       <span aria-hidden="true" className="absolute -right-6 -top-10 h-32 w-32 rounded-full border-[18px] border-white/35" />
       <span aria-hidden="true" className="absolute -bottom-12 -left-6 h-28 w-28 rounded-full bg-white/30 blur-sm" />
       <svg aria-hidden="true" viewBox="0 0 180 150" className="relative h-32 w-40 drop-shadow-xl">
-        <ellipse cx="90" cy="128" rx="48" ry="9" fill="#172033" opacity=".12" />
+        <ellipse cx="90" cy="128" rx="48" ry="9" fill="#231934" opacity=".12" />
         {isBottle ? (
           <>
             <path d="M76 28h28v17l10 12v56a10 10 0 0 1-10 10H76a10 10 0 0 1-10-10V57l10-12z" fill={palette.shape} />
-            <rect x="78" y="18" width="24" height="13" rx="3" fill="#172033" />
+            <rect x="78" y="18" width="24" height="13" rx="3" fill="#231934" />
             <rect x="70" y="68" width="40" height="31" rx="5" fill="white" opacity=".92" />
             <path d="M81 80h18M81 87h12" stroke={palette.detail} strokeWidth="4" strokeLinecap="round" />
           </>
@@ -61,7 +61,7 @@ function ProductArtwork({ name, imageUrl, index }: { name: string; imageUrl: str
           <>
             <path d="M48 52h68l20 16v55H48z" fill={palette.shape} />
             <path d="M116 52l20 16h-68L48 52z" fill={palette.detail} />
-            <path d="M116 52v71l20-16V68z" fill="#172033" opacity=".18" />
+            <path d="M116 52v71l20-16V68z" fill="#231934" opacity=".18" />
             <rect x="66" y="78" width="47" height="29" rx="4" fill="white" opacity=".92" />
             <path d="M77 88h25M77 96h18" stroke={palette.shape} strokeWidth="4" strokeLinecap="round" />
           </>
@@ -121,11 +121,11 @@ export default function DiscoverPage() {
 
   return (
     <main className="min-h-screen overflow-hidden">
-      <header className="border-b border-slate-950/20 bg-[#172033] text-white">
+      <header className="border-b border-white/10 bg-[#231934] text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
           <Link href="/" className="flex items-center gap-2.5 font-extrabold tracking-tight">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-blue-200"><Store size={19} /></span>
-            <span>RandWise<span className="text-[#ff8b61]">.</span></span>
+            <span>RandWise<span className="text-[#f79193]">.</span></span>
           </Link>
           <Link href="/" className="rounded-full border border-white/20 px-4 py-2 text-sm font-bold text-white/85 transition hover:bg-white/10">
             Business dashboard <ArrowRight className="ml-1 inline" size={15} />
@@ -133,9 +133,9 @@ export default function DiscoverPage() {
         </div>
       </header>
 
-      <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#172033] via-[#294b99] to-[#6558c7] px-4 py-14 text-white sm:py-20">
+      <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#231934] via-[#34264c] to-[#246bfd] px-4 py-14 text-white sm:py-20">
         <div aria-hidden="true" className="animate-float absolute -right-16 -top-24 h-72 w-72 rounded-full border-[44px] border-white/[0.08]" />
-        <div aria-hidden="true" className="animate-float absolute -bottom-40 left-[12%] h-80 w-80 rounded-full bg-orange-400/15 blur-3xl" />
+        <div aria-hidden="true" className="animate-float absolute -bottom-40 left-[12%] h-80 w-80 rounded-full bg-[#f79193]/20 blur-3xl" />
         <div className="relative mx-auto max-w-5xl animate-enter">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-blue-50">
             <PackageSearch size={15} /> Shop closer, shop smarter
@@ -156,7 +156,7 @@ export default function DiscoverPage() {
               <MapPin size={19} className="shrink-0 text-orange-600" />
               <input aria-label="Area" value={areaInput} onChange={(event) => setAreaInput(event.target.value)} placeholder="Your area e.g. Soweto" className="min-w-0 border-0 bg-transparent px-0 py-3 text-gray-900 shadow-none focus:border-0 focus:ring-0" />
             </label>
-            <button type="submit" className="rounded-full bg-[#f47750] px-7 py-3 font-extrabold text-white shadow-lg shadow-orange-900/15 transition hover:-translate-y-0.5 hover:bg-[#df5c39]">
+            <button type="submit" className="rounded-full bg-[#246bfd] px-7 py-3 font-extrabold text-white shadow-lg shadow-blue-950/20 transition hover:-translate-y-0.5 hover:bg-[#1552d8]">
               Search nearby
             </button>
           </form>

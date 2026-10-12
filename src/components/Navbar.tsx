@@ -27,7 +27,7 @@ export default function Navbar({ email }: { email: string }) {
   const isMoreActive = moreLinks.some(({ href }) => pathname === href)
 
   return (
-    <nav aria-label="Main navigation" className="sticky top-0 z-50 border-b border-slate-950/30 bg-[#172033] text-white shadow-lg shadow-slate-950/15">
+    <nav aria-label="Main navigation" className="sticky top-0 z-50 border-b border-white/10 bg-[#231934] text-white shadow-lg shadow-black/15">
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6">
         <div className="flex min-w-0 items-center justify-between gap-3">
           <Link href="/" className="flex shrink-0 items-center gap-2.5">
@@ -36,7 +36,7 @@ export default function Navbar({ email }: { email: string }) {
             </span>
             <span>
               <span className="block text-[1.05rem] font-extrabold leading-tight tracking-tight">
-                RandWise<span className="text-[#ff8b61]">.</span>
+                RandWise<span className="text-[#f79193]">.</span>
               </span>
               <span className="hidden text-[0.65rem] text-slate-300/75 sm:block">SMALL BUSINESS, IN CONTROL</span>
             </span>
@@ -45,7 +45,7 @@ export default function Navbar({ email }: { email: string }) {
           <div className="flex min-w-0 items-center gap-2">
             <Link
               href="/discover"
-              className="whitespace-nowrap rounded-full bg-[#ff8b61] px-3 py-2 text-xs font-extrabold text-[#172033] transition hover:-translate-y-0.5 hover:bg-[#ff9d7b] active:scale-95 sm:px-4"
+              className="whitespace-nowrap rounded-full bg-[#246bfd] px-3 py-2 text-xs font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#1552d8] active:scale-95 sm:px-4"
             >
               <span className="hidden sm:inline">Switch to </span>Customer view
             </Link>
@@ -71,7 +71,7 @@ export default function Navbar({ email }: { email: string }) {
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={`whitespace-nowrap rounded-lg px-3 py-2 text-xs font-bold transition duration-200 hover:-translate-y-0.5 active:scale-95 sm:text-sm ${
-                  active ? "bg-white text-[#172033] shadow-sm" : "text-slate-100/85 hover:bg-white/10 hover:text-white"
+                  active ? "bg-[#246bfd] text-white shadow-sm" : "text-slate-100/85 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 {label}

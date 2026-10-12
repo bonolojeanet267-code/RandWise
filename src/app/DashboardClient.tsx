@@ -98,14 +98,14 @@ export default function Dashboard() {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-10">
-      <section className="animate-enter relative mb-8 overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-[#172033] via-[#294b99] to-[#6558c7] px-6 py-8 text-white shadow-xl shadow-indigo-950/15 sm:px-9 sm:py-10">
+      <section className="animate-enter relative mb-8 overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-[#231934] via-[#34264c] to-[#246bfd] px-6 py-8 text-white shadow-xl shadow-black/20 sm:px-9 sm:py-10">
         <div className="relative z-10 max-w-xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-blue-100/80">Your business at a glance</p>
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Good business starts with clarity.</h1>
           <p className="mt-3 max-w-md text-sm leading-6 text-slate-100/85 sm:text-base">Make every rand count. Keep your sales, stock and spending moving in the right direction.</p>
         </div>
         <div aria-hidden="true" className="animate-float absolute -right-10 -top-24 h-72 w-72 rounded-full border-[42px] border-white/[0.07]" />
-        <div aria-hidden="true" className="animate-float absolute -bottom-36 right-36 h-64 w-64 rounded-full bg-[#ff8b61]/20 blur-2xl" />
+        <div aria-hidden="true" className="animate-float absolute -bottom-36 right-36 h-64 w-64 rounded-full bg-[#f79193]/25 blur-2xl" />
       </section>
 
       <section className="mb-9">
@@ -117,11 +117,11 @@ export default function Dashboard() {
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {[
             { href: "/start", title: "Start and formalise", description: "Follow practical business setup steps.", icon: FileText, tone: "from-cyan-50 to-white", iconTone: "bg-cyan-100 text-cyan-800" },
-            { href: "/sales", title: "Bookkeeping and cash flow", description: "Keep sales, spending and money owed visible.", icon: WalletCards, tone: "from-sky-50 to-white", iconTone: "bg-sky-100 text-sky-800" },
+            { href: "/sales", title: "Bookkeeping and cash flow", description: "Keep sales, spending and money owed visible.", icon: WalletCards, tone: "from-sky-50 to-white", iconTone: "bg-[#f79193]/25 text-[#a8434a]" },
             { href: "/inventory", title: "Procurement and stock", description: "Record supplier invoices and track stock.", icon: Boxes, tone: "from-blue-50 to-white", iconTone: "bg-blue-100 text-blue-800" },
             { href: "/payments", title: "Digital payment tracking", description: "Record invoice payment status and method.", icon: HandCoins, tone: "from-amber-50 to-white", iconTone: "bg-amber-100 text-amber-800" },
             { href: "/funding", title: "Funding readiness", description: "Prepare a summary of your business records.", icon: FileText, tone: "from-violet-50 to-white", iconTone: "bg-violet-100 text-violet-800" },
-            { href: "/services", title: "Local IT support", description: "Connect with local technology providers.", icon: ArrowUpRight, tone: "from-teal-50 to-white", iconTone: "bg-teal-100 text-teal-800" },
+            { href: "/services", title: "Local IT support", description: "Connect with local technology providers.", icon: ArrowUpRight, tone: "from-teal-50 to-white", iconTone: "bg-[#f79193]/25 text-[#a8434a]" },
             { href: "/audit", title: "Activity and oversight", description: "Review recorded sales and stock receipts.", icon: ClipboardList, tone: "from-orange-50 to-white", iconTone: "bg-orange-100 text-orange-800" },
             { href: "/discover", title: "Customer market access", description: "See the separate public product directory.", icon: Search, tone: "from-rose-50 to-white", iconTone: "bg-rose-100 text-rose-800" },
           ].map(({ href, title, description, icon: Icon, tone, iconTone }, index) => (
@@ -177,7 +177,7 @@ export default function Dashboard() {
           </div>
           <div className="flex gap-4 text-xs font-semibold text-gray-600">
             <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-blue-600" />Sales</span>
-            <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-[#f47750]" />Expenses</span>
+            <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-[#f79193]" />Expenses</span>
           </div>
         </div>
 
@@ -194,10 +194,10 @@ export default function Dashboard() {
                   const expenseHeight = day.expenses ? Math.max(4, day.expenses / chartMax * 130) : 0
                   return (
                     <g key={day.key}>
-                      <rect x={groupX} y={164 - salesHeight} width="24" height={salesHeight} rx="7" fill="#3159c9">
+                      <rect x={groupX} y={164 - salesHeight} width="24" height={salesHeight} rx="7" fill="#246bfd">
                         <title>{`${day.label} sales: R${day.sales.toFixed(2)}`}</title>
                       </rect>
-                      <rect x={groupX + 30} y={164 - expenseHeight} width="24" height={expenseHeight} rx="7" fill="#f47750">
+                      <rect x={groupX + 30} y={164 - expenseHeight} width="24" height={expenseHeight} rx="7" fill="#f79193">
                         <title>{`${day.label} expenses: R${day.expenses.toFixed(2)}`}</title>
                       </rect>
                       <text x={groupX + 27} y="194" textAnchor="middle" fill="#687386" fontSize="12" fontWeight="600">{day.label}</text>

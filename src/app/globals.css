@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f6fb;
-  --foreground: #172033;
-  --brand: #3159c9;
-  --brand-dark: #24439f;
-  --accent: #ff8b61;
-  --muted: #687386;
-  --line: #e2e7f0;
+  --background: #231934;
+  --foreground: #ffffff;
+  --brand: #246bfd;
+  --brand-dark: #1552d8;
+  --accent: #f79193;
+  --positive: #8ec97b;
+  --muted: #d0c9dd;
+  --line: #e2dce9;
 }
 
 @theme inline {
@@ -25,7 +26,7 @@
   body {
     min-height: 100vh;
     background:
-      radial-gradient(ellipse at 8% 0%, rgb(225 232 251 / 75%), transparent 32rem),
+      radial-gradient(ellipse at 8% 0%, rgb(84 61 119 / 45%), transparent 32rem),
       var(--background);
     color: var(--foreground);
     font-family: Arial, Helvetica, sans-serif;
@@ -39,7 +40,7 @@
     border-radius: 0.8rem;
     background: #fff;
     padding: 0.7rem 0.85rem;
-    color: var(--foreground);
+    color: var(--background);
     outline: none;
     transition: border-color 160ms ease, box-shadow 160ms ease;
   }
@@ -68,15 +69,29 @@
   }
 }
 
+button:not(:disabled) {
+  background-color: var(--brand);
+  color: #fff;
+}
+
+button:not(:disabled):hover {
+  background-color: var(--brand-dark);
+}
+
+button:disabled {
+  opacity: 0.65;
+}
+
 .panel {
   border: 1px solid var(--line);
   border-radius: 1.25rem;
   background: rgb(255 255 255 / 92%);
+  color: var(--background);
   box-shadow: 0 8px 24px rgb(28 43 80 / 6%);
 }
 
 .page-title {
-  color: #172033;
+  color: var(--foreground);
   font-size: clamp(1.65rem, 3vw, 2.1rem);
   font-weight: 750;
   letter-spacing: -0.045em;
@@ -106,7 +121,7 @@
 
 .primary-button:hover:not(:disabled) {
   background: var(--brand-dark);
-  box-shadow: 0 6px 16px rgb(36 67 159 / 22%);
+  box-shadow: 0 6px 16px rgb(36 107 253 / 28%);
 }
 
 @keyframes rw-enter {

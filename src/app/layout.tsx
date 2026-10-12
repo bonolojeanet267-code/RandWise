@@ -24,9 +24,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#f4f6fb] text-gray-900">
+      <body className="min-h-full bg-[#231934] text-white">
         <AuthGate>{children}</AuthGate>
-        <footer className="border-t border-slate-200 bg-white/70 px-4 py-5 text-center text-xs text-slate-500">
+        <footer className="border-t border-white/10 bg-[#231934] px-4 py-5 text-center text-xs text-white/65">
           © 2026 RandWise. All rights reserved.
         </footer>
       </body>
