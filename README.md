@@ -1,6 +1,6 @@
 # RandWise
 
-RandWise helps young founders and small businesses build everyday trading and money-management records.
+RandWise helps young founders and small businesses manage everyday records, keep an eye on cash flow, and discover local market opportunities.
 
 ## Run locally
 
@@ -32,6 +32,7 @@ In the Supabase Dashboard, open **SQL Editor** and run these files in filename o
 4. [`supabase/migrations/20261012030000_public_product_finder.sql`](./supabase/migrations/20261012030000_public_product_finder.sql)
 5. [`supabase/migrations/20261012040000_product_photos.sql`](./supabase/migrations/20261012040000_product_photos.sql)
 6. [`supabase/migrations/20261012050000_rent_reminders.sql`](./supabase/migrations/20261012050000_rent_reminders.sql)
+7. [`supabase/migrations/20261012060000_financial_readiness_and_opportunities.sql`](./supabase/migrations/20261012060000_financial_readiness_and_opportunities.sql)
 
 The migrations assume the existing `products` table has UUID `id`, `name`, `qty`, `cost_price`, and `sell_price` columns; `sales` has `id`, `product_id`, `qty`, `total`, and `created_at`; and `invoices` has `id`, `invoice_no`, `customer_name`, `total`, `status`, and `created_at`.
 
@@ -43,7 +44,7 @@ Business owners can upload optional product photos (JPG, PNG, or WebP, up to 5 M
 
 ### Judge demo setup
 
-1. Apply all six migrations to the Supabase project used by the deployment.
+1. Apply all seven migrations to the Supabase project used by the deployment.
 2. In **Authentication → URL Configuration**, set the deployed app URL and add it to the allowed redirect URLs. For a frictionless judging demo, disable email confirmation only if appropriate for your Supabase project; otherwise confirm the account from the signup email.
 3. Deploy the app (for example, by importing the repository into Vercel) and configure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` as deployment environment variables. Redeploy after setting them. Never use a service-role key in the browser.
 4. Open the public URL in a private/incognito window, create a dedicated judge account and business, then add sample products, receive a supplier invoice, record a sale, and create an invoice. Use fictional data only.
@@ -53,12 +54,14 @@ The app repository does not contain deployment credentials and does not create o
 
 ## Challenge-related features
 
-- **Bookkeeping and cash flow:** Dashboard totals and pages for sales, expenses, budgets, and customer invoices.
+- **Bookkeeping and cash flow:** Dashboard totals and pages for sales, expenses, budgets, and customer invoices. A directional 30-day estimate extends the last seven days' recorded sales and expenses; it is not a bank balance or a guarantee of future results.
 - **Rent reminders:** Business owners can record premises rent due dates and amounts, see upcoming or overdue reminders on the dashboard, and mark payments as paid. These are in-app reminders, not automatic email, SMS, or push notifications; they do not automatically create expense records.
 - **Procurement and stock control:** Record supplier invoices and item lines; received quantities are added to stock. A sale and its stock deduction are recorded in one database transaction.
 - **Customer product discovery:** Customers can search public, in-stock products by name and area on `/discover`, a separate customer-facing directory. Business owners only see controls in Inventory to manage which items are shared; private bookkeeping and inventory management remain the core signed-in experience.
-- **Digital-payment readiness:** Record invoice payment status and method (cash, EFT, mobile money, or other). RandWise does not connect to a payment gateway or verify that funds arrived.
-- **Funding readiness:** Review an informational record-keeping checklist and export a summary of RandWise data. The summary is not a credit score, audited accounts, eligibility decision, or funding approval.
+- **Digital-payment readiness:** Record full or partial invoice payments, due dates and methods; see overdue balances and copy a reminder message to review and send manually. RandWise does not connect to a payment gateway, automatically message customers, or verify that funds arrived.
+- **Cash-flow overview:** View a 30-day directional estimate based on recent sales and expenses, with scheduled unpaid invoices and rent commitments shown separately. It is not a cash balance, accounting forecast, or guarantee of future results.
+- **Funding readiness:** Review completeness of business records and a browser-saved checklist of documents, then export a summary. Completion measures only items recorded or marked ready by the owner; it is not a credit score, audited accounts, eligibility decision, or funding approval.
+- **Supplier and procurement opportunities:** Save owner-verified opportunity notices, links, dates, notes, and application status in a private tracker. This is not a live or verified opportunity feed.
 - **Starting/formalising a business:** Follow a browser-saved checklist linking to official resources. Always verify current requirements, fees, and eligibility with the relevant authority.
 - **Market links:** RandWise Connect lists local IT support providers; this is a service directory, not a buyer or procurement marketplace.
 - **Activity oversight:** Review recent sales and stock invoices. This activity view supports visibility but is not a tamper-proof audit log or a guarantee against fraud.

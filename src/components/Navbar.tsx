@@ -11,6 +11,7 @@ const focusLinks = [
   { href: "/payments", label: "Payments" },
   { href: "/funding", label: "Funding" },
   { href: "/start", label: "Start up" },
+  { href: "/opportunities", label: "Opportunities" },
   { href: "/services", label: "IT Connect" },
   { href: "/audit", label: "Activity" },
 ]
