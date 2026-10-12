@@ -175,7 +175,7 @@ export default function RentRemindersClient() {
           {error}
         </p>
       )}
-      {notice && <p role="status" className="mb-4 rounded-xl border border-[#8ec97b]/60 bg-[#8ec97b]/20 p-3 text-sm text-[#27491d]">{notice}</p>}
+      {notice && <p role="status" className="mb-4 rounded-xl border border-[#8ec97b] bg-[#8ec97b] p-3 text-sm font-semibold text-[#231934]">{notice}</p>}
 
       <section className="mb-8">
         <div className="mb-3 flex items-center gap-2">

@@ -140,7 +140,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
             </label>
 
             {error && <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-800">{error}</p>}
-            {message && <p role="status" className="rounded-xl border border-[#8ec97b]/60 bg-[#8ec97b]/20 p-3 text-sm text-[#27491d]">{message}</p>}
+            {message && <p role="status" className="rounded-xl border border-[#8ec97b] bg-[#8ec97b] p-3 text-sm font-semibold text-[#231934]">{message}</p>}
             <button disabled={busy} type="submit" className="primary-button flex items-center justify-center gap-2 p-3 disabled:cursor-not-allowed disabled:opacity-60">
               {busy ? <LoaderCircle className="animate-spin" size={18} /> : <>{mode === "sign-up" ? "Create account" : "Sign in"} <ArrowRight size={17} /></>}
             </button>

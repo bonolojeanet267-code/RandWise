@@ -7,7 +7,7 @@ export default function Services() {
   const [providers, setProviders] = useState<any[]>([])
   useEffect(()=>{
     async function load(){ const { data } = await supabase.from("it_providers").select("*"); if(data && data.length>0) setProviders(data); else setProviders([
-      { company_name:"CodeFix Boksburg", services:["Testing","Website Setup"], location:"Boksburg", price_from:500, whatsapp:"27600000000", verified:true, bio:"We help spaza shops test stock & build catalogs"},
+      { company_name:"DialTesting Lab", services:["Testing","Website Setup"], location:"Boksburg", price_from:500, whatsapp:"27600000000", verified:true, bio:"We help spaza shops test stock & build catalogs"},
       { company_name:"Tshwane Techies", services:["POS Setup","Training"], location:"Pretoria", price_from:350, whatsapp:"27600000001", verified:true, bio:"Small IT team for small businesses"},
       { company_name:"Kasi Devs", services:["Data Clean-up","Testing"], location:"Soweto", price_from:250, whatsapp:"27600000002", verified:false, bio:"Students offering affordable IT help"}
     ])}

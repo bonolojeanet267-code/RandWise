@@ -355,7 +355,7 @@ export default function Inventory() {
         </section>
 
         {error && <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-800">{error}</p>}
-        {notice && <p role="status" className="rounded-xl border border-[#8ec97b]/60 bg-[#8ec97b]/20 p-3 text-sm text-[#27491d]">{notice}</p>}
+        {notice && <p role="status" className="rounded-xl border border-[#8ec97b] bg-[#8ec97b] p-3 text-sm font-semibold text-[#231934]">{notice}</p>}
         <button type="submit" disabled={saving} className="primary-button p-3 disabled:cursor-not-allowed disabled:opacity-60">
           {saving ? "Recording invoice..." : "Record invoice and update stock"}
         </button>
