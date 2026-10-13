@@ -14,7 +14,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)
   const [checkingSession, setCheckingSession] = useState(true)
   const [businessReady, setBusinessReady] = useState(false)
-  const [mode, setMode] = useState<AuthMode>("sign-up")
+  const [mode, setMode] = useState<AuthMode>("sign-in")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [businessName, setBusinessName] = useState("")
@@ -40,14 +40,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
       }
 
       setSession(data.session)
-      if (data.session) {
-        const { error: businessError } = await supabase.rpc("bootstrap_business", {
-          p_business_name: "My Business",
-        })
-        if (!active) return
-        if (businessError) setError(`Could not open your business space: ${businessError.message}`)
-        else setBusinessReady(true)
-      }
+      setBusinessReady(Boolean(data.session))
       setCheckingSession(false)
     }
 
@@ -105,9 +98,8 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
   if (checkingSession || (session && !businessReady && !error)) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p role="status" className="flex items-center gap-2 text-sm font-semibold text-gray-600">
-          <LoaderCircle className="animate-spin" size={18} /> Opening your secure business space...
-        </p>
+        <span role="status" aria-label="Checking sign-in" className="sr-only">Checking sign-in</span>
+        <LoaderCircle className="animate-spin text-[#246bfd]" size={20} aria-hidden="true" />
       </div>
     )
   }

@@ -6,7 +6,7 @@ import { BarChart3, ChevronDown, LogOut } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 
 const focusLinks = [
-  { href: "/", label: "Dashboard" },
+  { href: "/", label: "Growth hub" },
   { href: "/inventory", label: "Stock & supply" },
   { href: "/payments", label: "Payments" },
   { href: "/funding", label: "Funding" },
@@ -40,7 +40,7 @@ export default function Navbar({ email }: { email: string }) {
               <span className="block text-[1.05rem] font-extrabold leading-tight tracking-tight">
                 RandWise<span className="text-[#f79193]">.</span>
               </span>
-              <span className="hidden text-[0.65rem] text-slate-300/75 sm:block">SMALL BUSINESS, IN CONTROL</span>
+              <span className="hidden text-[0.65rem] text-slate-300/75 sm:block">SMALL BUSINESS GROWTH COMPANION</span>
             </span>
           </Link>
 
