@@ -627,7 +627,7 @@ export default function Dashboard() {
         <article className="panel p-5 sm:p-6">
           <div className="mb-4 flex items-center justify-between gap-2">
             <div><p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Monthly budget</p><h2 className="mt-1 text-sm font-bold text-[#231934]">Spending progress</h2></div>
-            <Link href="/budgets" className="rounded-lg border border-[#246bfd]/30 px-2.5 py-1.5 text-xs font-bold text-[#1552d8] hover:bg-[#246bfd]/5">Update budget</Link>
+            {data.budgets.length > 0 && <Link href="/budgets" className="rounded-lg border border-[#246bfd]/30 px-2.5 py-1.5 text-xs font-bold text-[#1552d8] hover:bg-[#246bfd]/5">Update budget</Link>}
           </div>
           {currentBudgetLimit > 0 ? (
             <>
@@ -647,7 +647,7 @@ export default function Dashboard() {
             <div className="rounded-xl bg-[#246bfd]/5 p-4">
               <p className="text-sm font-semibold text-[#231934]">No spending limits yet</p>
               <p className="mt-1 text-xs leading-5 text-gray-500">Set category limits to compare planned and recorded costs.</p>
-              <Link href="/budgets" className="mt-3 inline-flex text-xs font-bold text-[#1552d8] hover:underline">Set a budget →</Link>
+              {data.budgets.length === 0 && <Link href="/budgets" className="mt-3 inline-flex text-xs font-bold text-[#1552d8] hover:underline">Set a budget →</Link>}
             </div>
           )}
           {overBudgetCategories.length > 0 && <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-[#a8434a]"><CircleAlert size={14} />{overBudgetCategories.length} category limit alert{overBudgetCategories.length === 1 ? "" : "s"}</p>}
